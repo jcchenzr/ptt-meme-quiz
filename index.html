@@ -22,8 +22,9 @@
     .result h2{margin:0 0 8px;font-size:24px}.big{font-size:34px;font-weight:900;color:var(--pink)} .small{color:var(--muted)}
     .card{background:var(--card);border:2px solid #ffe0ec;border-radius:24px;padding:18px 15px;margin:0 0 14px;box-shadow:var(--shadow)} .meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
     .qid{font-weight:900;color:#ff5a9d}.tag{font-size:12px;padding:6px 10px;border-radius:999px;background:#fff4a8;border:1px solid #ffe27c} h3{margin:8px 0 10px;font-size:18px;line-height:1.45}
-    .choices{display:grid;gap:8px;margin-top:10px}.choice{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1.5px solid #f3dbe6;border-radius:16px;padding:10px 12px} .choice.correct{border-color:#95e3bf;background:#f3fff8} .choice.wrong{border-color:#ffc0cc;background:#fff6f8}
-    .choice input{margin-top:5px;transform:scale(1.1)} details{margin-top:14px} summary{list-style:none;cursor:pointer;display:inline-block;background:linear-gradient(90deg,var(--pink2),#ffd9e8);border:1.5px solid #ffbfd7;border-radius:999px;padding:10px 14px;font-weight:900} summary::-webkit-details-marker{display:none}
+    .choices{display:grid;gap:8px;margin-top:10px}.choice{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1.5px solid #f3dbe6;border-radius:16px;padding:10px 12px;transition:.15s ease} .choice.correct{border-color:#95e3bf;background:#f3fff8} .choice.wrong{border-color:#ffc0cc;background:#fff6f8} .choice.dim{opacity:.72}
+    .choice input{margin-top:5px;transform:scale(1.1)} .badge-inline{display:inline-block;margin-left:8px;padding:3px 8px;border-radius:999px;font-size:12px;font-weight:800}.badge-ok{background:#e9fff3;color:#16985c}.badge-bad{background:#fff0f4;color:#e0416b}
+    details{margin-top:14px} summary{list-style:none;cursor:pointer;display:inline-block;background:linear-gradient(90deg,var(--pink2),#ffd9e8);border:1.5px solid #ffbfd7;border-radius:999px;padding:10px 14px;font-weight:900} summary::-webkit-details-marker{display:none}
     .answer{margin-top:12px;padding:14px;border-radius:18px;background:#fff;border:1.5px dashed #ffc5db} .answer strong{color:#ff4f95}.empty{text-align:center;color:var(--muted);padding:28px}
     @media (max-width:720px){.hero{padding:14px 12px;border-radius:22px}.tools{grid-template-columns:1fr 1fr}.search{grid-column:1/-1}.card{padding:16px 13px;border-radius:20px}}
   </style>
@@ -89,32 +90,78 @@ function render(){
   list.innerHTML=arr.length?'':'<div class="empty">找不到對應的梗，這可能代表你查得太精準（？）</div>';
   arr.forEach(x=>{
     const el=document.createElement('article'); el.className='card';
-    el.innerHTML=`<div class="meta"><span class="qid">Q${x.id}</span><span class="tag">${x.tag}</span></div><h3>${x.q}</h3><div class="choices">${x.c.map((i,idx)=>`<label class="choice" data-q="${x.id}" data-choice="${String.fromCharCode(65+idx)}"><input type="radio" name="q${x.id}" value="${String.fromCharCode(65+idx)}"> <span><strong>${String.fromCharCode(65+idx)}.</strong> ${i}</span></label>`).join('')}</div><details><summary>展開解答</summary><div class="answer"><strong>答案：${x.a}</strong><br><br>${x.e}</div></details>`;
+    el.innerHTML=`<div class="meta"><span class="qid">Q${x.id}</span><span class="tag">${x.tag}</span></div><h3>${x.q}</h3><div class="choices">${x.c.map((i,idx)=>`<label class="choice" data-q="${x.id}" data-choice="${String.fromCharCode(65+idx)}"><input type="radio" name="q${x.id}" value="${String.fromCharCode(65+idx)}"> <span><strong>${String.fromCharCode(65+idx)}.</strong> ${i}</span></label>`).join('')}</div><details id="detail-${x.id}"><summary>展開解答</summary><div class="answer"><strong>答案：${x.a}</strong><br><br>${x.e}</div></details>`;
     list.appendChild(el);
+  });
+  bindImmediateFeedback();
+}
+function updateScoreCard(){
+  let score=0, answered=0;
+  questions.forEach(q=>{
+    const picked=document.querySelector(`input[name="q${q.id}"]:checked`);
+    if(picked){ answered++; if(picked.value===q.a) score++; }
+  });
+  result.classList.add('show');
+  result.innerHTML=`<h2>目前作答進度 ✨</h2><div class="big">${score} / ${questions.length}</div><div class="small">已作答 ${answered} 題・目前等級：${level(score)}</div><p>${answered===questions.length ? '你已經全部作答完，可以直接看總成績。' : '每點一題都會即時判斷對錯，也會自動展開解析。'}</p>`;
+}
+function markQuestion(qid, pickedValue){
+  const q = questions.find(x => x.id === qid);
+  const choices = document.querySelectorAll(`.choice[data-q="${qid}"]`);
+  choices.forEach(el => {
+    el.classList.remove('correct','wrong','dim');
+    const badge = el.querySelector('.badge-inline');
+    if (badge) badge.remove();
+  });
+  choices.forEach(el => {
+    const val = el.dataset.choice;
+    if (val === q.a) {
+      el.classList.add('correct');
+      if (pickedValue === q.a) {
+        const ok = document.createElement('span');
+        ok.className = 'badge-inline badge-ok';
+        ok.textContent = '答對';
+        el.querySelector('span').appendChild(ok);
+      }
+    } else if (val === pickedValue) {
+      el.classList.add('wrong');
+      const bad = document.createElement('span');
+      bad.className = 'badge-inline badge-bad';
+      bad.textContent = '答錯';
+      el.querySelector('span').appendChild(bad);
+    } else {
+      el.classList.add('dim');
+    }
+  });
+  const detail = document.getElementById(`detail-${qid}`);
+  if (detail) detail.open = true;
+}
+function bindImmediateFeedback(){
+  document.querySelectorAll('.choice input').forEach(input => {
+    input.addEventListener('change', e => {
+      const qid = Number(e.target.name.replace('q',''));
+      markQuestion(qid, e.target.value);
+      updateScoreCard();
+    });
   });
 }
 function scoreQuiz(){
   let score=0;
-  document.querySelectorAll('.choice').forEach(el=>el.classList.remove('correct','wrong'));
   questions.forEach(q=>{
     const picked=document.querySelector(`input[name="q${q.id}"]:checked`);
-    const right=document.querySelector(`.choice[data-q="${q.id}"][data-choice="${q.a}"]`);
-    if(right) right.classList.add('correct');
-    if(picked){
-      if(picked.value===q.a) score++;
-      else {
-        const wrong=document.querySelector(`.choice[data-q="${q.id}"][data-choice="${picked.value}"]`);
-        if(wrong) wrong.classList.add('wrong');
-      }
-    }
+    if(picked && picked.value===q.a) score++;
   });
   result.classList.add('show');
-  result.innerHTML=`<h2>你的分數出來了 ✨</h2><div class="big">${score} / ${questions.length}</div><div class="small">等級：${level(score)}</div><p>${score>=18?'你這個根本不是路過，是長期浸泡型。':score>=14?'你明顯有在混，很多語感不是新手猜得出來的。':score>=8?'有跟到不少梗，但還有一些老練的語氣差值得再練。':'你比較像善良路人，還沒被網路語境醃入味。'}</p>`;
+  result.innerHTML=`<h2>你的總分出來了 ✨</h2><div class="big">${score} / ${questions.length}</div><div class="small">等級：${level(score)}</div><p>${score>=18?'你這個根本不是路過，是長期浸泡型。':score>=14?'你明顯有在混，很多語感不是新手猜得出來的。':score>=8?'有跟到不少梗，但還有一些老練的語氣差值得再練。':'你比較像善良路人，還沒被網路語境醃入味。'}</p>`;
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function resetQuiz(){
   document.querySelectorAll('input[type="radio"]').forEach(i=>i.checked=false);
-  document.querySelectorAll('.choice').forEach(el=>el.classList.remove('correct','wrong'));
+  document.querySelectorAll('.choice').forEach(el=>{
+    el.classList.remove('correct','wrong','dim');
+    const badge = el.querySelector('.badge-inline');
+    if (badge) badge.remove();
+  });
+  document.querySelectorAll('details').forEach(d=>d.open=false);
   result.classList.remove('show'); result.innerHTML='';
 }
 document.getElementById('submitQuiz').onclick=scoreQuiz;
