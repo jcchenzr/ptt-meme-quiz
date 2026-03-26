@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>PTT 鄉民梗小考 20 題</title>
+  <style>
+    :root{
+      --bg1:#fff7fb; --bg2:#eef8ff; --card:#ffffffcc; --text:#46385a; --muted:#7a6d8f;
+      --pink:#ff8fbb; --pink2:#ffb3cf; --blue:#8ed6ff; --yellow:#ffe48c; --line:#f2cfe0;
+      --shadow:0 14px 34px rgba(236,122,171,.16);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; color:var(--text); font-family:"Segoe UI","Noto Sans TC",system-ui,sans-serif;
+      background:linear-gradient(180deg,var(--bg1),var(--bg2)); line-height:1.7;
+    }
+    .wrap{max-width:980px;margin:0 auto;padding:18px 14px 60px}
+    .hero{
+      background:linear-gradient(135deg,#fff,#fff8fd 40%,#f0fbff);
+      border:2px solid #ffd7e8; border-radius:28px; padding:24px 18px; box-shadow:var(--shadow);
+      position:sticky; top:0; z-index:5; backdrop-filter: blur(8px);
+    }
+    h1{margin:0 0 8px;font-size:clamp(28px,7vw,42px);line-height:1.15}
+    .sub{color:var(--muted);font-size:15px}
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+    .chip{background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:8px 12px;font-size:13px}
+    .tools{display:grid;grid-template-columns:1fr auto auto;gap:10px;margin:16px 0 18px}
+    .search,.btn{border-radius:16px;border:1.5px solid var(--line);background:#fff;padding:12px 14px;font-size:15px}
+    .btn{cursor:pointer;font-weight:700;color:var(--text)}
+    .btn:hover{transform:translateY(-1px)}
+    .stats{font-size:14px;color:#8b5f78;margin:8px 2px 14px}
+    .card{
+      background:var(--card); border:2px solid #ffe0ec; border-radius:24px; padding:18px 16px; margin:0 0 14px;
+      box-shadow:var(--shadow);
+    }
+    .meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+    .qid{font-weight:800;color:#ff5f9f}
+    .tag{font-size:12px;padding:6px 10px;border-radius:999px;background:#fff4a8;border:1px solid #ffe27c}
+    h3{margin:8px 0 10px;font-size:19px;line-height:1.4}
+    ol{margin:0 0 0 22px;padding:0}
+    li{margin:4px 0}
+    details{margin-top:14px}
+    summary{
+      list-style:none; cursor:pointer; display:inline-block; background:linear-gradient(90deg,var(--pink2),#ffd9e8);
+      border:1.5px solid #ffbfd7; border-radius:999px; padding:10px 14px; font-weight:800;
+    }
+    summary::-webkit-details-marker{display:none}
+    .answer{margin-top:12px;padding:14px;border-radius:18px;background:#fff;border:1.5px dashed #ffc5db}
+    .answer strong{color:#ff4f95}
+    .empty{text-align:center;color:var(--muted);padding:28px}
+    .foot{margin-top:26px;text-align:center;color:var(--muted);font-size:13px}
+    @media (max-width:720px){
+      .wrap{padding:12px 10px 44px}
+      .hero{padding:18px 14px;border-radius:22px}
+      .tools{grid-template-columns:1fr 1fr;}
+      .tools .search{grid-column:1/-1}
+      .card{padding:16px 14px;border-radius:20px}
+      h3{font-size:18px}
+      .btn,.search,summary{font-size:14px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>PTT 鄉民梗／時事梗小考 🫶</h1>
+      <div class="sub">20 題輕鬆有趣版小測驗。適合朋友互考、滑手機殺時間、測一下自己是不是老鄉民（？）</div>
+      <div class="chips">
+        <span class="chip">可愛輕鬆風</span>
+        <span class="chip">手機優化</span>
+        <span class="chip">每題可展開解答</span>
+        <span class="chip">PTT / 網路迷因 / 台灣時事語感</span>
+      </div>
+    </section>
+
+    <section class="tools">
+      <input id="search" class="search" type="search" placeholder="搜尋關鍵字，例如：翻車、鄉民、迷因、政治、炎上" />
+      <button id="expandAll" class="btn">全部展開</button>
+      <button id="collapseAll" class="btn">全部收合</button>
+    </section>
+
+    <div class="stats" id="stats"></div>
+    <div id="list"></div>
+    <div class="foot">本網站為趣味整理版，不是學術考證站。梗有時代感，笑點也有世代差 🐟</div>
+  </div>
+
+<script>
+const questions = [
+  {id:1,tag:'鄉民語感',q:'看到推文有人回「太苦了」，通常比較接近哪種語氣？',c:['誠摯祝福對方中樂透','帶點無奈、嘲諷又有共感的感嘆','單純在講糖很苦','是在討論咖啡豆烘焙'],a:'B',e:'「太苦了」常被拿來表示：這情境也太慘、太辛苦、太荒謬了吧。'},
+  {id:2,tag:'網路迷因',q:'如果一則貼文底下被刷「翻車」，通常代表什麼？',c:['作者真的去開車','原本的說法、立場或人設出現重大破綻','文章太長沒人看','留言數破百'],a:'B',e:'「翻車」就是原本看似穩，結果被打臉、出包、露餡。'},
+  {id:3,tag:'PTT用語',q:'「朝聖」一詞在線上討論常表示什麼？',c:['真的去廟裡進香','特地跑來看名場面、經典文或重大事件現場','準備寫論文','去拜訪站長'],a:'B',e:'常用於經典爆文、神串、炎上現場。'},
+  {id:4,tag:'網路語境',q:'別人留言「這我不行」，最可能是什麼意思？',c:['網路壞掉','對某內容感到尷尬、太雷或無法接受','他沒考過駕照','只是手滑'],a:'B',e:'通常是在說：這畫面、這操作、這風格，我真的吃不下。'},
+  {id:5,tag:'PTT用語',q:'「逆風」最常代表哪種情境？',c:['颱風天騎車','立場不受歡迎、與主流意見相反','電風扇開太強','股票一定跌'],a:'B',e:'逆風言論就是跟大多數人的氛圍唱反調。'},
+  {id:6,tag:'時事梗',q:'當網友說某人「炎上」了，意思通常是？',c:['真的著火','引發大規模負面討論或公關危機','天氣很熱','直播效果很好'],a:'B',e:'「炎上」來自日文用法，現在很常見。'},
+  {id:7,tag:'迷因判斷',q:'「我就爛」這句迷因式回應，核心通常是？',c:['積極上進宣言','半自嘲、半放棄治療式的回應','健身口號','股票分析術語'],a:'B',e:'常用來化解尷尬，或直接承認自己擺爛。'},
+  {id:8,tag:'PTT文化',q:'看到有人推「先知總是寂寞」，通常是在稱讚什麼？',c:['對方很會算命','某人先前不被看好但後來被證明講對了','對方很安靜','他很邊緣'],a:'B',e:'意思是：早就講過了，現在果然應驗。'},
+  {id:9,tag:'社群語感',q:'如果有人說「這操作很頂」，通常表示？',c:['電梯太高','這操作很強、很猛、很有料','網路訊號很滿','帽子戴得很正'],a:'B',e:'「很頂」就是很讚、很到位。'},
+  {id:10,tag:'鄉民反應',q:'留言區出現一排「笑死」，比較可能代表？',c:['大家真的快笑到昏倒','內容很好笑、荒謬，或帶有吐槽效果','正在討論醫學','直播設備故障'],a:'B',e:'多數時候是情緒反應，不一定字面真要笑死。'},
+  {id:11,tag:'網路迷因',q:'「大型社死現場」通常在形容什麼？',c:['社交活動很大場','非常尷尬、顏面掃地的公開場面','公司尾牙','政治造勢'],a:'B',e:'「社死」= 社會性死亡，意思是尷尬到不想活在這世界。'},
+  {id:12,tag:'PTT用語',q:'若一篇文章被說是「釣魚」，常指哪一種？',c:['分享海釣心得','故意丟爭議話題引戰或吸反應','介紹魚市場','露營記錄'],a:'B',e:'網路語境中的釣魚，就是 bait。'},
+  {id:13,tag:'梗圖語感',q:'看到「你各位啊」這種開場，語氣通常偏向？',c:['超正式公文','半認真半搞笑地對眾人喊話','古文朗誦','產品說明書'],a:'B',e:'很有台味、很有群眾感的網路講法。'},
+  {id:14,tag:'時事梗',q:'「吃瓜」在中文網路語境通常是？',c:['真的在市場買西瓜','旁觀看熱鬧、追八卦事件發展','營養建議','水果攤促銷'],a:'B',e:'就是圍觀群眾模式。'},
+  {id:15,tag:'網路語感',q:'如果有人說「這波不虧」，通常是在表達？',c:['會計結算完成','雖然不一定大賺，但至少有賺到某種價值或爽度','一定漲停','保險理賠成功'],a:'B',e:'常用在得到樂子、得到經驗、得到好處時。'},
+  {id:16,tag:'PTT文化',q:'一句話被稱為「經典回文素材」，通常意味著？',c:['文法正確','那句話很有梗，未來很可能被反覆引用或改寫','已申請版權','需要印出來'],a:'B',e:'網友很愛把有梗句型再創作。'},
+  {id:17,tag:'迷因判讀',q:'「這很可以」最接近下列哪個意思？',c:['系統可執行','我覺得不錯、我能接受、甚至有點喜歡','法規核可','數學證明成立'],a:'B',e:'語感偏正面，帶點輕鬆甚至曖昧。'},
+  {id:18,tag:'時事觀察',q:'網友說某新聞「資訊量太大」，通常不是在稱讚篇幅長，而是在說？',c:['字太多沒看完','事件離奇、反轉多、槽點密集','檔案太肥','記者用字優美'],a:'B',e:'常常帶點傻眼與吃驚。'},
+  {id:19,tag:'社群互動',q:'如果留言「懂的都懂」，最可能是在表達什麼？',c:['真的在考閱讀測驗','這件事有圈內默契或背景，不打算明講','大家都很懂法律','系統教學模式'],a:'B',e:'有時是暗示、有時是裝神秘，也可能是在玩梗。'},
+  {id:20,tag:'鄉民結論',q:'當大家回「這題我給過」，語氣通常是？',c:['正式評分公告','表示認可、覺得不錯、有被說服或逗到','考試監考語','法官宣判'],a:'B',e:'算是一種輕鬆版的「這可以、我買單」。'}
+];
+const list=document.getElementById('list'); const stats=document.getElementById('stats'); let q='';
+function render(){
+  const arr=questions.filter(x=>`${x.tag} ${x.q} ${x.c.join(' ')} ${x.e}`.toLowerCase().includes(q.toLowerCase()));
+  stats.textContent=`目前顯示 ${arr.length} / ${questions.length} 題`;
+  list.innerHTML = arr.length ? '' : '<div class="empty">找不到對應的梗，可能你太新、也可能你太老（？）</div>';
+  arr.forEach(x=>{
+    const el=document.createElement('article'); el.className='card';
+    el.innerHTML=`<div class="meta"><span class="qid">Q${x.id}</span><span class="tag">${x.tag}</span></div><h3>${x.q}</h3><ol type="A">${x.c.map(i=>`<li>${i}</li>`).join('')}</ol><details><summary>展開解答</summary><div class="answer"><strong>答案：${x.a}</strong><br><br>${x.e}</div></details>`;
+    list.appendChild(el);
+  })
+}
+document.getElementById('search').addEventListener('input',e=>{q=e.target.value.trim();render()});
+document.getElementById('expandAll').onclick=()=>document.querySelectorAll('details').forEach(d=>d.open=true);
+document.getElementById('collapseAll').onclick=()=>document.querySelectorAll('details').forEach(d=>d.open=false);
+render();
+</script>
+</body>
+</html>
