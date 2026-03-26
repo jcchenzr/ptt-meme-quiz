@@ -3,125 +3,124 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>PTT 鄉民梗小考 20 題</title>
+  <title>PTT 鄉民梗／時事梗測驗</title>
   <style>
     :root{
-      --bg1:#fff7fb; --bg2:#eef8ff; --card:#ffffffcc; --text:#46385a; --muted:#7a6d8f;
-      --pink:#ff8fbb; --pink2:#ffb3cf; --blue:#8ed6ff; --yellow:#ffe48c; --line:#f2cfe0;
-      --shadow:0 14px 34px rgba(236,122,171,.16);
+      --bg1:#fff8fc; --bg2:#edf8ff; --card:#ffffffee; --text:#46385a; --muted:#7a6d8f;
+      --pink:#ff7fb3; --pink2:#ffc4db; --blue:#8dd9ff; --yellow:#ffe58f; --line:#f3d2e1;
+      --ok:#2bb673; --bad:#ff5d7d; --shadow:0 14px 36px rgba(236,122,171,.15);
     }
     *{box-sizing:border-box}
-    body{
-      margin:0; color:var(--text); font-family:"Segoe UI","Noto Sans TC",system-ui,sans-serif;
-      background:linear-gradient(180deg,var(--bg1),var(--bg2)); line-height:1.7;
-    }
-    .wrap{max-width:980px;margin:0 auto;padding:18px 14px 60px}
-    .hero{
-      background:linear-gradient(135deg,#fff,#fff8fd 40%,#f0fbff);
-      border:2px solid #ffd7e8; border-radius:28px; padding:24px 18px; box-shadow:var(--shadow);
-      position:sticky; top:0; z-index:5; backdrop-filter: blur(8px);
-    }
-    h1{margin:0 0 8px;font-size:clamp(28px,7vw,42px);line-height:1.15}
-    .sub{color:var(--muted);font-size:15px}
-    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-    .chip{background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:8px 12px;font-size:13px}
-    .tools{display:grid;grid-template-columns:1fr auto auto;gap:10px;margin:16px 0 18px}
-    .search,.btn{border-radius:16px;border:1.5px solid var(--line);background:#fff;padding:12px 14px;font-size:15px}
-    .btn{cursor:pointer;font-weight:700;color:var(--text)}
-    .btn:hover{transform:translateY(-1px)}
-    .stats{font-size:14px;color:#8b5f78;margin:8px 2px 14px}
-    .card{
-      background:var(--card); border:2px solid #ffe0ec; border-radius:24px; padding:18px 16px; margin:0 0 14px;
-      box-shadow:var(--shadow);
-    }
-    .meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
-    .qid{font-weight:800;color:#ff5f9f}
-    .tag{font-size:12px;padding:6px 10px;border-radius:999px;background:#fff4a8;border:1px solid #ffe27c}
-    h3{margin:8px 0 10px;font-size:19px;line-height:1.4}
-    ol{margin:0 0 0 22px;padding:0}
-    li{margin:4px 0}
-    details{margin-top:14px}
-    summary{
-      list-style:none; cursor:pointer; display:inline-block; background:linear-gradient(90deg,var(--pink2),#ffd9e8);
-      border:1.5px solid #ffbfd7; border-radius:999px; padding:10px 14px; font-weight:800;
-    }
-    summary::-webkit-details-marker{display:none}
-    .answer{margin-top:12px;padding:14px;border-radius:18px;background:#fff;border:1.5px dashed #ffc5db}
-    .answer strong{color:#ff4f95}
-    .empty{text-align:center;color:var(--muted);padding:28px}
-    .foot{margin-top:26px;text-align:center;color:var(--muted);font-size:13px}
-    @media (max-width:720px){
-      .wrap{padding:12px 10px 44px}
-      .hero{padding:18px 14px;border-radius:22px}
-      .tools{grid-template-columns:1fr 1fr;}
-      .tools .search{grid-column:1/-1}
-      .card{padding:16px 14px;border-radius:20px}
-      h3{font-size:18px}
-      .btn,.search,summary{font-size:14px}
-    }
+    body{margin:0;color:var(--text);font-family:"Segoe UI","Noto Sans TC",system-ui,sans-serif;background:linear-gradient(180deg,var(--bg1),var(--bg2));line-height:1.7}
+    .wrap{max-width:980px;margin:0 auto;padding:12px 10px 56px}
+    .hero{position:sticky;top:0;z-index:10;background:linear-gradient(135deg,#fff,#fff8fd 42%,#eefaff);border:2px solid #ffd8e8;border-radius:26px;padding:22px 16px;box-shadow:var(--shadow);backdrop-filter:blur(10px)}
+    h1{margin:0 0 8px;font-size:clamp(27px,7vw,40px);line-height:1.15}
+    .sub{color:var(--muted);font-size:14px}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.chip{background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:8px 12px;font-size:13px}
+    .tools{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:16px 0}.btn,.search{border:1.5px solid var(--line);background:#fff;border-radius:16px;padding:12px 14px;font-size:15px}.btn{cursor:pointer;font-weight:800}
+    .search{grid-column:1/-1}.stats{font-size:14px;color:#8b5f78;margin:8px 2px 14px}.scorebar{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}.scorepill{background:#fff;border:1.5px solid #ffd4e5;border-radius:999px;padding:8px 12px;font-size:13px}
+    .result{display:none;margin:0 0 16px;background:#fff;border:2px solid #ffd8ea;border-radius:24px;padding:18px;box-shadow:var(--shadow)} .result.show{display:block}
+    .result h2{margin:0 0 8px;font-size:24px}.big{font-size:34px;font-weight:900;color:var(--pink)} .small{color:var(--muted)}
+    .card{background:var(--card);border:2px solid #ffe0ec;border-radius:24px;padding:18px 15px;margin:0 0 14px;box-shadow:var(--shadow)} .meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+    .qid{font-weight:900;color:#ff5a9d}.tag{font-size:12px;padding:6px 10px;border-radius:999px;background:#fff4a8;border:1px solid #ffe27c} h3{margin:8px 0 10px;font-size:18px;line-height:1.45}
+    .choices{display:grid;gap:8px;margin-top:10px}.choice{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1.5px solid #f3dbe6;border-radius:16px;padding:10px 12px} .choice.correct{border-color:#95e3bf;background:#f3fff8} .choice.wrong{border-color:#ffc0cc;background:#fff6f8}
+    .choice input{margin-top:5px;transform:scale(1.1)} details{margin-top:14px} summary{list-style:none;cursor:pointer;display:inline-block;background:linear-gradient(90deg,var(--pink2),#ffd9e8);border:1.5px solid #ffbfd7;border-radius:999px;padding:10px 14px;font-weight:900} summary::-webkit-details-marker{display:none}
+    .answer{margin-top:12px;padding:14px;border-radius:18px;background:#fff;border:1.5px dashed #ffc5db} .answer strong{color:#ff4f95}.empty{text-align:center;color:var(--muted);padding:28px}
+    @media (max-width:720px){.hero{padding:18px 14px;border-radius:22px}.tools{grid-template-columns:1fr 1fr}.search{grid-column:1/-1}.card{padding:16px 13px;border-radius:20px}}
   </style>
 </head>
 <body>
   <div class="wrap">
     <section class="hero">
-      <h1>PTT 鄉民梗／時事梗小考 🫶</h1>
-      <div class="sub">20 題輕鬆有趣版小測驗。適合朋友互考、滑手機殺時間、測一下自己是不是老鄉民（？）</div>
+      <h1>PTT 鄉民梗／時事梗進階測驗 🐟</h1>
+      <div class="sub">這版有計分模式，而且題目比前一版更偏「真的有在混網路語境」的人才比較容易答對。</div>
       <div class="chips">
-        <span class="chip">可愛輕鬆風</span>
+        <span class="chip">20 題進階版</span>
+        <span class="chip">可作答計分</span>
         <span class="chip">手機優化</span>
-        <span class="chip">每題可展開解答</span>
-        <span class="chip">PTT / 網路迷因 / 台灣時事語感</span>
+        <span class="chip">每題可展開解析</span>
+      </div>
+      <div class="scorebar">
+        <span class="scorepill">0-7：路過鄉民</span>
+        <span class="scorepill">8-13：中階吃瓜仔</span>
+        <span class="scorepill">14-17：資深梗圖師</span>
+        <span class="scorepill">18-20：板上名人等級</span>
       </div>
     </section>
 
     <section class="tools">
-      <input id="search" class="search" type="search" placeholder="搜尋關鍵字，例如：翻車、鄉民、迷因、政治、炎上" />
+      <input id="search" class="search" type="search" placeholder="搜尋關鍵字，例如：反串、翻車、逆風、朝聖、懂的都懂" />
+      <button id="submitQuiz" class="btn">送出計分</button>
       <button id="expandAll" class="btn">全部展開</button>
-      <button id="collapseAll" class="btn">全部收合</button>
+      <button id="resetQuiz" class="btn">重新作答</button>
     </section>
 
+    <div class="result" id="result"></div>
     <div class="stats" id="stats"></div>
     <div id="list"></div>
-    <div class="foot">本網站為趣味整理版，不是學術考證站。梗有時代感，笑點也有世代差 🐟</div>
   </div>
-
 <script>
-const questions = [
-  {id:1,tag:'鄉民語感',q:'看到推文有人回「太苦了」，通常比較接近哪種語氣？',c:['誠摯祝福對方中樂透','帶點無奈、嘲諷又有共感的感嘆','單純在講糖很苦','是在討論咖啡豆烘焙'],a:'B',e:'「太苦了」常被拿來表示：這情境也太慘、太辛苦、太荒謬了吧。'},
-  {id:2,tag:'網路迷因',q:'如果一則貼文底下被刷「翻車」，通常代表什麼？',c:['作者真的去開車','原本的說法、立場或人設出現重大破綻','文章太長沒人看','留言數破百'],a:'B',e:'「翻車」就是原本看似穩，結果被打臉、出包、露餡。'},
-  {id:3,tag:'PTT用語',q:'「朝聖」一詞在線上討論常表示什麼？',c:['真的去廟裡進香','特地跑來看名場面、經典文或重大事件現場','準備寫論文','去拜訪站長'],a:'B',e:'常用於經典爆文、神串、炎上現場。'},
-  {id:4,tag:'網路語境',q:'別人留言「這我不行」，最可能是什麼意思？',c:['網路壞掉','對某內容感到尷尬、太雷或無法接受','他沒考過駕照','只是手滑'],a:'B',e:'通常是在說：這畫面、這操作、這風格，我真的吃不下。'},
-  {id:5,tag:'PTT用語',q:'「逆風」最常代表哪種情境？',c:['颱風天騎車','立場不受歡迎、與主流意見相反','電風扇開太強','股票一定跌'],a:'B',e:'逆風言論就是跟大多數人的氛圍唱反調。'},
-  {id:6,tag:'時事梗',q:'當網友說某人「炎上」了，意思通常是？',c:['真的著火','引發大規模負面討論或公關危機','天氣很熱','直播效果很好'],a:'B',e:'「炎上」來自日文用法，現在很常見。'},
-  {id:7,tag:'迷因判斷',q:'「我就爛」這句迷因式回應，核心通常是？',c:['積極上進宣言','半自嘲、半放棄治療式的回應','健身口號','股票分析術語'],a:'B',e:'常用來化解尷尬，或直接承認自己擺爛。'},
-  {id:8,tag:'PTT文化',q:'看到有人推「先知總是寂寞」，通常是在稱讚什麼？',c:['對方很會算命','某人先前不被看好但後來被證明講對了','對方很安靜','他很邊緣'],a:'B',e:'意思是：早就講過了，現在果然應驗。'},
-  {id:9,tag:'社群語感',q:'如果有人說「這操作很頂」，通常表示？',c:['電梯太高','這操作很強、很猛、很有料','網路訊號很滿','帽子戴得很正'],a:'B',e:'「很頂」就是很讚、很到位。'},
-  {id:10,tag:'鄉民反應',q:'留言區出現一排「笑死」，比較可能代表？',c:['大家真的快笑到昏倒','內容很好笑、荒謬，或帶有吐槽效果','正在討論醫學','直播設備故障'],a:'B',e:'多數時候是情緒反應，不一定字面真要笑死。'},
-  {id:11,tag:'網路迷因',q:'「大型社死現場」通常在形容什麼？',c:['社交活動很大場','非常尷尬、顏面掃地的公開場面','公司尾牙','政治造勢'],a:'B',e:'「社死」= 社會性死亡，意思是尷尬到不想活在這世界。'},
-  {id:12,tag:'PTT用語',q:'若一篇文章被說是「釣魚」，常指哪一種？',c:['分享海釣心得','故意丟爭議話題引戰或吸反應','介紹魚市場','露營記錄'],a:'B',e:'網路語境中的釣魚，就是 bait。'},
-  {id:13,tag:'梗圖語感',q:'看到「你各位啊」這種開場，語氣通常偏向？',c:['超正式公文','半認真半搞笑地對眾人喊話','古文朗誦','產品說明書'],a:'B',e:'很有台味、很有群眾感的網路講法。'},
-  {id:14,tag:'時事梗',q:'「吃瓜」在中文網路語境通常是？',c:['真的在市場買西瓜','旁觀看熱鬧、追八卦事件發展','營養建議','水果攤促銷'],a:'B',e:'就是圍觀群眾模式。'},
-  {id:15,tag:'網路語感',q:'如果有人說「這波不虧」，通常是在表達？',c:['會計結算完成','雖然不一定大賺，但至少有賺到某種價值或爽度','一定漲停','保險理賠成功'],a:'B',e:'常用在得到樂子、得到經驗、得到好處時。'},
-  {id:16,tag:'PTT文化',q:'一句話被稱為「經典回文素材」，通常意味著？',c:['文法正確','那句話很有梗，未來很可能被反覆引用或改寫','已申請版權','需要印出來'],a:'B',e:'網友很愛把有梗句型再創作。'},
-  {id:17,tag:'迷因判讀',q:'「這很可以」最接近下列哪個意思？',c:['系統可執行','我覺得不錯、我能接受、甚至有點喜歡','法規核可','數學證明成立'],a:'B',e:'語感偏正面，帶點輕鬆甚至曖昧。'},
-  {id:18,tag:'時事觀察',q:'網友說某新聞「資訊量太大」，通常不是在稱讚篇幅長，而是在說？',c:['字太多沒看完','事件離奇、反轉多、槽點密集','檔案太肥','記者用字優美'],a:'B',e:'常常帶點傻眼與吃驚。'},
-  {id:19,tag:'社群互動',q:'如果留言「懂的都懂」，最可能是在表達什麼？',c:['真的在考閱讀測驗','這件事有圈內默契或背景，不打算明講','大家都很懂法律','系統教學模式'],a:'B',e:'有時是暗示、有時是裝神秘，也可能是在玩梗。'},
-  {id:20,tag:'鄉民結論',q:'當大家回「這題我給過」，語氣通常是？',c:['正式評分公告','表示認可、覺得不錯、有被說服或逗到','考試監考語','法官宣判'],a:'B',e:'算是一種輕鬆版的「這可以、我買單」。'}
+const questions=[
+{id:1,tag:'語境判讀',q:'有人在推文回「這篇太純了」，通常比較可能不是在稱讚真誠，而是在暗示什麼？',c:['內容化學成分單純','原 PO 太天真、不懂網路生態或太容易相信別人','文筆很純熟','作者沒加標點'],a:'B',e:'「太純了」常帶有：你也太沒防備、太容易被帶風向、太不懂這圈在玩什麼的意思。'},
+{id:2,tag:'反串辨識',q:'若一則留言表面上極端吹捧，實際卻讓人覺得在酸，最貼近哪種網路手法？',c:['考古','反串','備份','洗地'],a:'B',e:'反串的核心是表面一套、語氣或情境讓你知道他其實在反著講。'},
+{id:3,tag:'社群氛圍',q:'留言「你先確定欸」常見的隱含功能是？',c:['確認行事曆','質疑對方資訊來源或邏輯是否站得住腳','幫忙報到','提醒記得存檔'],a:'B',e:'這句話通常不是字面確認，而是帶點輕嘲的 challenge。'},
+{id:4,tag:'鄉民語感',q:'當一串留言開始出現「這我一定吉」，語境最可能是？',c:['準備包粽子','有人覺得被抹黑、被造謠，開始放話要提告','準備考試及格','吉祥話時間'],a:'B',e:'「吉」是「告」的迷因化說法。'},
+{id:5,tag:'PTT文化',q:'「朝聖推」和一般推文最大的差異通常在於？',c:['字數比較長','重點不是討論內容，而是參與經典現場本身','一定比較專業','一定有附圖'],a:'B',e:'朝聖是參與感，不是知識貢獻。'},
+{id:6,tag:'風向判讀',q:'某篇文一開始被大推，後來大量人改口說「原來風向在這」，最可能表示什麼？',c:['真的有氣象系統進站','新的資訊出現，群體判斷明顯轉向','站方改版','有新板主上任'],a:'B',e:'「風向」就是社群輿論的傾斜方向。'},
+{id:7,tag:'網路互酸',q:'「你要不要先去做功課」在線上討論常帶有什麼效果？',c:['真心提供學習建議','暗示對方資訊不足，語氣往往偏不耐或居高臨下','邀請讀書會','推薦補習班'],a:'B',e:'這句話在吵架場景通常不是溫柔建議。'},
+{id:8,tag:'迷因演化',q:'如果有人說「這鍋我不背」，核心是在表達？',c:['在討論廚具','拒絕承擔責任或切割責任歸屬','今天不吃火鍋','行李太重'],a:'B',e:'「這鍋」= 這個責任。是中文網路常見迷因句型。'},
+{id:9,tag:'社群觀察',q:'「大型翻車現場」和「大型真香現場」最大的差別是？',c:['一個在室內一個在室外','前者是被打臉，後者是前後立場逆轉後自己承認真香','前者比較長','後者一定跟吃有關'],a:'B',e:'真香重點在態度反轉；翻車重點在崩壞出包。'},
+{id:10,tag:'輿論用語',q:'若一個帳號被說在「帶風向」，通常在指什麼？',c:['他是氣象主播','他試圖有意識影響群眾看法與討論方向','他在教電風扇用法','他很會主持'],a:'B',e:'這常帶有操控輿論、刻意引導的負面意味。'},
+{id:11,tag:'PTT語感',q:'「有卦？」最自然的理解是？',c:['在討論八卦版版規','有沒有內情、八卦、未公開資訊','在問掛號進度','在求占卜'],a:'B',e:'這是很經典的台灣網路問法。'},
+{id:12,tag:'炎上場景',q:'當有人留言「公關公司可以下班了」時，通常在酸什麼？',c:['公司真的打卡下班','某些護航言論太制式、太像洗白腳本','公司福利很好','新聞稿寫太短'],a:'B',e:'這句常用來嘲諷過度一致、像模板的護航。'},
+{id:13,tag:'反差梗',q:'「本來想大聲斥責，但實在太大了」這類句型會流傳，關鍵通常是？',c:['符合文法規範','前後反差形成喜感，容易被套用再創作','字體很大','句子有押韻'],a:'B',e:'名句能變成梗，通常因為它有可複製的反差結構。'},
+{id:14,tag:'圈內默契',q:'「懂的都懂」這句最常被拿來做什麼？',c:['正式解釋背景知識','製造一種圈內感、暗示有隱情，甚至帶點裝神秘','要求大家閉嘴','提醒看說明書'],a:'B',e:'有時是真的圈內梗，有時純粹在營造氣氛。'},
+{id:15,tag:'社死梗',q:'如果大家說某影片是「年度社死教材」，通常意思是？',c:['可拿去教公民','那段內容尷尬到足以當經典教材反覆觀摩','可以進國家檔案館','拍攝技巧很好'],a:'B',e:'社死教材 = 尷尬範本。'},
+{id:16,tag:'鄉民戰法',q:'在留言戰中，「貼標籤」最接近哪種操作？',c:['做美術排版','先把對方歸類成某種立場，降低其發言可信度','寄包裹','整理資料夾'],a:'B',e:'這是常見的討論偷吃步，不一定真的回應內容。'},
+{id:17,tag:'迷因語氣',q:'「這很有聲音」如果不是在講音量，通常是指什麼？',c:['麥克風很大聲','內容風格鮮明、辨識度高，一看就知道是哪種路數','音檔格式正確','現場回音嚴重'],a:'B',e:'這是一種很社群化的審美評語。'},
+{id:18,tag:'群眾心理',q:'當留言區充滿「先卡」時，最可能是在做什麼？',c:['在辦門禁卡','先佔位，等後續發展、等更新、等爆點','先去停車','網路卡住'],a:'B',e:'「卡」就是卡位等後續。'},
+{id:19,tag:'時事梗感',q:'某事件被說成「今年 KPI 達成」，常見的幽默邏輯是？',c:['真的在做績效考核','某人或某群體又完成了外界對他們的既定負面印象','公司年終很好','案子順利結束'],a:'B',e:'這種講法常帶有黑色幽默與刻板印象式吐槽。'},
+{id:20,tag:'高階鄉民',q:'如果一篇文被稱作「模板感太重」，大家通常在嫌什麼？',c:['HTML 很醜','內容像精心包裝、話術規整、缺乏真實感，甚至像公關稿','排版沒有置中','圖片解析度太低'],a:'B',e:'「模板感」重點不是文筆工整，而是像被設計過、很不自然。'}
 ];
-const list=document.getElementById('list'); const stats=document.getElementById('stats'); let q='';
+const list=document.getElementById('list'), stats=document.getElementById('stats'), result=document.getElementById('result'); let query='';
+function level(score){ if(score<=7) return '路過鄉民 🥲'; if(score<=13) return '中階吃瓜仔 👀'; if(score<=17) return '資深梗圖師 😎'; return '板上名人等級 🏆'; }
 function render(){
-  const arr=questions.filter(x=>`${x.tag} ${x.q} ${x.c.join(' ')} ${x.e}`.toLowerCase().includes(q.toLowerCase()));
+  const arr=questions.filter(x=>`${x.tag} ${x.q} ${x.c.join(' ')} ${x.e}`.toLowerCase().includes(query.toLowerCase()));
   stats.textContent=`目前顯示 ${arr.length} / ${questions.length} 題`;
-  list.innerHTML = arr.length ? '' : '<div class="empty">找不到對應的梗，可能你太新、也可能你太老（？）</div>';
+  list.innerHTML=arr.length?'':'<div class="empty">找不到對應的梗，這可能代表你查得太精準（？）</div>';
   arr.forEach(x=>{
     const el=document.createElement('article'); el.className='card';
-    el.innerHTML=`<div class="meta"><span class="qid">Q${x.id}</span><span class="tag">${x.tag}</span></div><h3>${x.q}</h3><ol type="A">${x.c.map(i=>`<li>${i}</li>`).join('')}</ol><details><summary>展開解答</summary><div class="answer"><strong>答案：${x.a}</strong><br><br>${x.e}</div></details>`;
+    el.innerHTML=`<div class="meta"><span class="qid">Q${x.id}</span><span class="tag">${x.tag}</span></div><h3>${x.q}</h3><div class="choices">${x.c.map((i,idx)=>`<label class="choice" data-q="${x.id}" data-choice="${String.fromCharCode(65+idx)}"><input type="radio" name="q${x.id}" value="${String.fromCharCode(65+idx)}"> <span><strong>${String.fromCharCode(65+idx)}.</strong> ${i}</span></label>`).join('')}</div><details><summary>展開解答</summary><div class="answer"><strong>答案：${x.a}</strong><br><br>${x.e}</div></details>`;
     list.appendChild(el);
-  })
+  });
 }
-document.getElementById('search').addEventListener('input',e=>{q=e.target.value.trim();render()});
+function scoreQuiz(){
+  let score=0;
+  document.querySelectorAll('.choice').forEach(el=>el.classList.remove('correct','wrong'));
+  questions.forEach(q=>{
+    const picked=document.querySelector(`input[name="q${q.id}"]:checked`);
+    const right=document.querySelector(`.choice[data-q="${q.id}"][data-choice="${q.a}"]`);
+    if(right) right.classList.add('correct');
+    if(picked){
+      if(picked.value===q.a) score++;
+      else {
+        const wrong=document.querySelector(`.choice[data-q="${q.id}"][data-choice="${picked.value}"]`);
+        if(wrong) wrong.classList.add('wrong');
+      }
+    }
+  });
+  result.classList.add('show');
+  result.innerHTML=`<h2>你的分數出來了 ✨</h2><div class="big">${score} / ${questions.length}</div><div class="small">等級：${level(score)}</div><p>${score>=18?'你這個根本不是路過，是長期浸泡型。':score>=14?'你明顯有在混，很多語感不是新手猜得出來的。':score>=8?'有跟到不少梗，但還有一些老練的語氣差值得再練。':'你比較像善良路人，還沒被網路語境醃入味。'}</p>`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function resetQuiz(){
+  document.querySelectorAll('input[type="radio"]').forEach(i=>i.checked=false);
+  document.querySelectorAll('.choice').forEach(el=>el.classList.remove('correct','wrong'));
+  result.classList.remove('show'); result.innerHTML='';
+}
+document.getElementById('submitQuiz').onclick=scoreQuiz;
+document.getElementById('resetQuiz').onclick=resetQuiz;
 document.getElementById('expandAll').onclick=()=>document.querySelectorAll('details').forEach(d=>d.open=true);
-document.getElementById('collapseAll').onclick=()=>document.querySelectorAll('details').forEach(d=>d.open=false);
+document.getElementById('search').addEventListener('input',e=>{query=e.target.value.trim(); render();});
 render();
 </script>
 </body>
