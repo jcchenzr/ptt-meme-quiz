@@ -13,7 +13,7 @@
     *{box-sizing:border-box}
     body{margin:0;color:var(--text);font-family:"Segoe UI","Noto Sans TC",system-ui,sans-serif;background:linear-gradient(180deg,var(--bg1),var(--bg2));line-height:1.7}
     .wrap{max-width:980px;margin:0 auto;padding:12px 10px 56px}
-    .hero{position:sticky;top:0;z-index:10;background:linear-gradient(135deg,#fff,#fff8fd 42%,#eefaff);border:2px solid #ffd8e8;border-radius:26px;padding:22px 16px;box-shadow:var(--shadow);backdrop-filter:blur(10px)}
+    .hero{background:linear-gradient(135deg,#fff,#fff8fd 42%,#eefaff);border:2px solid #ffd8e8;border-radius:26px;padding:18px 16px;box-shadow:var(--shadow)}
     h1{margin:0 0 8px;font-size:clamp(27px,7vw,40px);line-height:1.15}
     .sub{color:var(--muted);font-size:14px}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.chip{background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:8px 12px;font-size:13px}
     .tools{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:16px 0}.btn,.search{border:1.5px solid var(--line);background:#fff;border-radius:16px;padding:12px 14px;font-size:15px}.btn{cursor:pointer;font-weight:800}
@@ -25,7 +25,7 @@
     .choices{display:grid;gap:8px;margin-top:10px}.choice{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1.5px solid #f3dbe6;border-radius:16px;padding:10px 12px} .choice.correct{border-color:#95e3bf;background:#f3fff8} .choice.wrong{border-color:#ffc0cc;background:#fff6f8}
     .choice input{margin-top:5px;transform:scale(1.1)} details{margin-top:14px} summary{list-style:none;cursor:pointer;display:inline-block;background:linear-gradient(90deg,var(--pink2),#ffd9e8);border:1.5px solid #ffbfd7;border-radius:999px;padding:10px 14px;font-weight:900} summary::-webkit-details-marker{display:none}
     .answer{margin-top:12px;padding:14px;border-radius:18px;background:#fff;border:1.5px dashed #ffc5db} .answer strong{color:#ff4f95}.empty{text-align:center;color:var(--muted);padding:28px}
-    @media (max-width:720px){.hero{padding:18px 14px;border-radius:22px}.tools{grid-template-columns:1fr 1fr}.search{grid-column:1/-1}.card{padding:16px 13px;border-radius:20px}}
+    @media (max-width:720px){.hero{padding:14px 12px;border-radius:22px}.tools{grid-template-columns:1fr 1fr}.search{grid-column:1/-1}.card{padding:16px 13px;border-radius:20px}}
   </style>
 </head>
 <body>
